@@ -23,5 +23,9 @@
   },
   "scripts": {
     "test": "jest"
+  },
+ 
+  "bin": {
+    "mdLinks": "./src/cli.js"
   }
 }

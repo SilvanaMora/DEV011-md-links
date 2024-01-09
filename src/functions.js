@@ -76,8 +76,20 @@ const validateLinks = (enlacesExtraidos) => {
         return { ...link, status: err.status, statusText: err.statusText };
       });
   });
-  return Promise.all(newArrayEnlaces)
-  
+  return Promise.all(newArrayEnlaces);
+};
+
+//para estadisticas hito 4
+const linksTotales = (array) => {
+  const numLinks = array.length;
+  let unique = []
+  array.forEach(link => {
+    if(!unique.includes(link.href)){
+      unique.push(link.href)
+    }
+  });
+  const broken = array.filter(item => item.status !== 200)
+  return { totalLinks: numLinks, rotos: broken.length, unicos:unique.length};
 };
 
 module.exports = {
@@ -87,4 +99,5 @@ module.exports = {
   readArchive,
   extractLinks,
   validateLinks,
+  linksTotales,
 };

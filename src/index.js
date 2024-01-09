@@ -1,18 +1,18 @@
-const {converAbsolute, pathUserExist, isMd, readArchive, extractLinks, validateLinks} = require("./functions");
+const {converAbsolute, pathUserExist, isMd, readArchive, extractLinks, validateLinks, linksTotales} = require("./functions");
 
 
 
-function mdLinks (path,validate=false) {
+function mdLinks (path,validate,stats) {
   return new Promise ((resolve, reject) => {
   
   const rutaConvertida = converAbsolute(path);
   
   const isOk = pathUserExist(rutaConvertida)
-  if(isOk===false){
+  if(!isOk){
     reject('La ruta no existe')
   }
   const isMarkdown = isMd(rutaConvertida)
-  if(isMarkdown===false) {
+  if(!isMarkdown) {
     reject('no es MD')
   }
  
@@ -26,9 +26,20 @@ function mdLinks (path,validate=false) {
             resolve(arrayLinks);
           }).catch(data =>{
             resolve(data)
-          })
+         })
+
         }else{
           resolve(links)
+        }
+        if (stats) {
+          // resolve (linksTotales(links))
+          validateLinks(links)  
+          .then((arrayLinks)=> {
+            const prueba2 = linksTotales(arrayLinks)
+            resolve(prueba2)
+          }).catch(data =>{
+            resolve(data)
+         })
         }
       })
       // .then ((linksPar) =>{
@@ -41,6 +52,7 @@ function mdLinks (path,validate=false) {
       });
   });
   
+
 
 }
 

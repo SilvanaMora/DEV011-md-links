@@ -1,7 +1,14 @@
-const {mdLinks} = require ('./index.js');
+#!/usr/bin/env node
 
-// console.log('hola, funciona por favor', mdLinks);
+const {mdLinks} = require('./index.js');
 
-mdLinks('src/prueba.md')
+const ruta=process.argv[2]; // para leer los datos que esta proporcionando el usuario 
+const validate=process.argv.includes('--validate');
+const stats=process.argv.includes('--stats'); 
+console.log(ruta, validate, stats)
+
+
+mdLinks(ruta, validate, stats)
 .then(res => console.log("esta es la respuesta", res))
-.catch(error => console.error("este es el error", error))
+.catch(error => console.log("este es el error", error))
+
