@@ -16,23 +16,12 @@ function mdLinks (path,validate,stats) {
     reject('no es MD')
   }
  
+
   readArchive(rutaConvertida)
       .then((resData) => {
       const links = extractLinks(resData, rutaConvertida) 
-        // resolve(links);
-        if (validate) {
-          validateLinks(links)  
-          .then((arrayLinks)=> {
-            resolve(arrayLinks);
-          }).catch(data =>{
-            resolve(data)
-         })
-
-        }else{
-          resolve(links)
-        }
         if (stats) {
-          // resolve (linksTotales(links))
+
           validateLinks(links)  
           .then((arrayLinks)=> {
             const prueba2 = linksTotales(arrayLinks)
@@ -40,18 +29,15 @@ function mdLinks (path,validate,stats) {
           }).catch(data =>{
             resolve(data)
          })
-        }
+        }else{
+          resolve(links);
+          }
+
       })
-      // .then ((linksPar) =>{
-       
-      //   // console.log({prueba,links})
-      //   //return validateLinks(links)
-      // })
       .catch((err) => {
         reject(err);
       });
   });
-  
 
 
 }
