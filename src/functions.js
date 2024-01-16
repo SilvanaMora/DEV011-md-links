@@ -11,13 +11,7 @@ const pathUserExist = (pathUser) => fs.existsSync(pathUser);
 
 const isMd = (
   pathUser //funcion para ver si es MD
-) =>
-  // if('.md' === path.extname(pathUser)){
-  //     return true
-  // } else {
-  //     return false
-  // }
-  path.extname(pathUser) === ".md";
+) => path.extname(pathUser) === ".md";
 
 const readArchive = (pathUser) => {
   //funcion para leer el archivo
@@ -80,16 +74,16 @@ const validateLinks = (enlacesExtraidos) => {
 };
 
 //para estadisticas hito 4
-const linksTotales = (array) => {
-  const numLinks = array.length;
-  let unique = []
-  array.forEach(link => {
-    if(!unique.includes(link.href)){
-      unique.push(link.href)
+const linksTotales = (array) => { 
+  const numLinks = array.length; //cuenta los enlaces totales
+  let unique = []; // crea arreglo para almacenar enlaces unicos  
+  array.forEach((link) => { //itera sobre los enlaces y agrega los únicos al arreglo unique
+    if (!unique.includes(link.href)) { //comprueba si el enlacce ya está en el arreglo
+      unique.push(link.href); //si no estsa lo agrega 
     }
   });
-  const broken = array.filter(item => item.status !== 200)
-  return { totalLinks: numLinks, rotos: broken.length, unicos:unique.length};
+  const broken = array.filter((item) => item.status !== 200); //filtra enlacws rotos
+  return { totalLinks: numLinks, rotos: broken.length, unicos: unique.length }; //devuelve el obejto con las estadisticass 
 };
 
 module.exports = {

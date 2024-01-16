@@ -3,7 +3,7 @@
 const {mdLinks} = require('./index.js');
 
 const ruta=process.argv[2]; // para leer los datos que esta proporcionando el usuario 
-const validate=process.argv.includes('--validate');
+const validate=process.argv.includes('--validate'); //asignamos el valor de la expresion a la variable
 const stats=process.argv.includes('--stats'); 
 console.log(ruta, validate, stats)
 
